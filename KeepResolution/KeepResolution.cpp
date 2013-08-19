@@ -2,7 +2,7 @@
 #include <Windows.h>
 
 struct res {
-	int bpp, x, y;
+	int x, y, bpp;
 };
 
 void changeResolution(int x, int y, int bpp) {
@@ -29,7 +29,7 @@ res getCurrentResolution() {
 
 res getRequestedResolution() {
 	//TODO: Read from config
-	res r = {1920, 1200, 32};
+	res r = {1920, 1080, 32};
 	return r;
 }
 
