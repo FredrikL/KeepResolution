@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include <Windows.h>
+#include <string>
 
 struct res {
 	int x, y, bpp;
@@ -28,8 +29,15 @@ res getCurrentResolution() {
 }
 
 res getRequestedResolution() {
-	//TODO: Read from config
-	res r = {1920, 1080, 32};
+	TCHAR path[512];
+	GetCurrentDirectory(512, path);
+	auto filepath = std::wstring(path) + L"\\keepresolution.ini";
+
+	auto x = GetPrivateProfileInt(L"resolution",L"x",1920, filepath.c_str());
+	auto y = GetPrivateProfileInt(L"resolution",L"y",1080, filepath.c_str());
+	auto bpp = GetPrivateProfileInt(L"resolution",L"bpp",32, filepath.c_str());
+
+	res r = {x, y, bpp};
 	return r;
 }
 
